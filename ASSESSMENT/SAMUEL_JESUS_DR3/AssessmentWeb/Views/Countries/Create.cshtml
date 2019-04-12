@@ -1,0 +1,53 @@
+﻿@model AssessmentDomain.Entities.Country
+
+@{
+    ViewBag.Title = "New Country";
+    ViewBag.PageModule = "Countries";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3>Create</h3>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "Countries", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.Name)
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="binaryFile">Flag image</label>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFile">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="binaryFile" name="binaryFile">
+                        <label class="custom-file-label" for="binaryFile">Choose file</label>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.PhotoUrl, "", new { @class = "text-danger" })
+            </div>
+
+            <button name="submit" type="submit" class="btn btn-outline-success">Submit</button>
+
+        }
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Assessment.ViewModels.FriendModel>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h3>Friends</h3>
+
+    @if (ViewBag.ShowCreateButton == true)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-sm btn-outline-success" })
+        </p>
+    }
+    <hr />
+
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var friend in Model)
+            {
+                <div class="col-md-3">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <a href="@Url.Action("Details", "Friends", new {id = friend.Id})">
+
+                                    <img src="@friend.PhotoUrl" class="img-fluid" style="max-height: 240px;" />
+                                </a>
+                            </div>
+                            <p class="card-text"><strong>Full Name: </strong> @friend.FullName</p>
+                            <p class="card-text"><strong>Birth: </strong>@Html.Raw(friend.BirthDate.ToShortDateString())</p>
+                            <p class="card-text"><strong>Phone: </strong>@friend.PhoneNumber</p>
+                            <p class="card-text"><strong>E-mail: </strong>@friend.Email</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    @Html.ActionLink("Edit", "Edit", new {id = friend.Id}, new {@class = "btn btn-sm btn-outline-secondary"})
+                                    @Html.ActionLink("Delete", "Delete", new {id = friend.Id}, new {@class = "btn btn-sm btn-outline-danger"})
+                                </div>
+                                <img width="64" class="img img-thumbnail" src="@friend.CountryFlagPhotoUrl" title="@friend.CountryName"/>
+                                <img width="64" class="img img-thumbnail" src="@friend.StateFlagPhotoUrl" title="@friend.StateName"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }

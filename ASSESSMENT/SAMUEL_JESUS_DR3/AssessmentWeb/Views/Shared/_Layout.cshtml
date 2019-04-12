@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>@ViewBag.Title - Assessment 19GRPADS01BNT301</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    @RenderSection("stlyles", false)
+</head>
+<body class="adminbody">
+    <div id="main">
+        <!-- top bar navigation -->
+        <div class="headerbar">
+
+            <!-- LOGO -->
+            <div class="headerbar-left">
+                <a href="index.html" class="logo"><img alt="Logo" src="~/assets/images/logo.png" /> <span>Assessment</span></a>
+            </div>
+
+            <nav class="navbar-custom">
+
+                <ul class="list-inline menu-left mb-0">
+                    <li class="float-left">
+                        <button class="button-menu-mobile open-left">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+        <!-- End Navigation -->
+        @{
+            Html.RenderPartial("_SideBarMenu");
+        }
+
+        <div class="content-page">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="breadcrumb-holder">
+                                <h1 class="main-title float-left">@ViewBag.Title</h1>
+                                <ol class="breadcrumb float-right">
+                                    <li class="breadcrumb-item">Home</li>
+                                    @if (ViewBag.PageModule != null)
+                                    {
+                                        <li class="breadcrumb-item active">@ViewBag.PageModule</li>
+                                    }
+                                </ol>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <span class="text-right">
+                @if (ViewBag.PageModule != null)
+                {
+                    <button onclick="history.go(-1)" class="btn btn-sm btn-outline-info ml-2 mr-5">Back</button>
+                }
+            </span>
+            <span class="text-center">
+                Copyright <a target="_blank" href="#">Assessment</a>
+            </span>
+            <span class="float-right">
+                Layout by <a target="_blank" href="https://www.pikeadmin.com"><b>Pike Admin</b></a>
+            </span>
+        </footer>
+
+    </div>
+    <script src="~/assets/js/modernizr.min.js"></script>
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/moment.min.js"></script>
+
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+
+    <script src="~/assets/js/detect.js"></script>
+    <script src="~/assets/js/fastclick.js"></script>
+    <script src="~/assets/js/jquery.blockUI.js"></script>
+    <script src="~/assets/js/jquery.nicescroll.js"></script>
+
+    <script src="~/assets/js/pikeadmin.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,98 @@
+﻿@model Assessment.ViewModels.FriendModel
+
+@{
+    ViewBag.Title = $"Profile - {Model.FullName}";
+    ViewBag.PageModule = "Friends";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3>Edit</h3>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Edit", "Friends", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(model => model.PhotoUrl)
+            @Html.HiddenFor(model => model.CountryId)
+            @Html.HiddenFor(model => model.StateId)
+
+            @Html.AntiForgeryToken()
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.Name)
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.LastName)
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.PhoneNumber)
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(model => model.BirthDate)
+                    @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    @Html.Label("Country")
+                    <p>@Model.CountryName</p>
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.Label("State")
+                    <p>@Model.StateName</p>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="binaryFile">Flag image</label>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFile">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="binaryFile" name="binaryFile">
+                            <label class="custom-file-label" for="binaryFile">Choose file</label>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.PhotoUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            if ((MultiSelectList)ViewBag.MyFriends != null)
+            {
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+
+                        <label class="control-label">Friends:</label>
+                        <p class="text-muted"><small>(press Ctrl to select multiple friends)</small></p>
+                        @Html.DropDownList("MyFriendId", (MultiSelectList)ViewBag.MyFriends, new { @class = "custom-select", multiple = "multiple", required = "required" })
+
+                    </div>
+                </div>
+            }
+            <button type="submit" class="btn btn-outline-success">Save</button>
+
+        }
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

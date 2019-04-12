@@ -1,0 +1,68 @@
+﻿@model AssessmentDomain.Entities.Country
+
+@{
+    ViewBag.Title = $"Country - {Model.Name}";
+    ViewBag.PageModule = "Countries";
+}
+
+<div class="card my-3">
+    <div class="card-header">
+        <h3><i class="fa fa-user"></i> Country details</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div id="avatar_image">
+                    <img style="max-width:100px; height:auto;" src="@Model.PhotoUrl" alt="photo of @Model.Name" />
+                    <br />
+                    Photo
+                </div>
+            </div>
+            <div class="col-md-9">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                </dl>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-footer small text-muted">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>State/Province </h3>
+            </div>
+            <div class="card-body">
+                @if (Model.States.Any())
+                {
+                    <div class="widget-messages nicescroll" style="height: 300px;">
+                        @foreach (var item in Model.States)
+                        {
+                            <div class="message-user-img">
+                                <img style="max-width:64px; height:auto;" src="@item.FlagPhotoUrl" alt="photo of @item.Name" class="avatar-circle" />
+                            </div>
+                            <p class="message-item-user">@item.Name</p>
+                            <p class="message-item-msg"><a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Details","States", new {id=@item.Id})">State details</a></p>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p>No State/Province yet</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

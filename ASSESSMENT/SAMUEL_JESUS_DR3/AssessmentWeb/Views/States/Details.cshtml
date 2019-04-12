@@ -1,0 +1,38 @@
+﻿@model AssessmentWeb.Models.StateEditViewModel
+@{
+    ViewBag.Title = $"State - {Model.Name}";
+    ViewBag.PageModule = "States";
+}
+
+<div class="card my-3">
+    <div class="card-header">
+        <h3><i class="fa fa-user"></i> State details</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div id="avatar_image">
+                    <img style="max-width:100px; height:auto;" src="@Model.FlagPhotoUrl" alt="photo of @Model.Name" />
+                    <br />
+                    Photo
+                </div>
+            </div>
+            <div class="col-md-9">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                </dl>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-footer small text-muted">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
+    </div>
+</div>

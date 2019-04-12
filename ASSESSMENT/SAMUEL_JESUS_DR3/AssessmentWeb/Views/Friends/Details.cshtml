@@ -1,0 +1,88 @@
+﻿@model Assessment.ViewModels.FriendModel
+
+    @{
+        ViewBag.Title = $"Profile - {Model.FullName}";
+        ViewBag.PageModule = "Friends";
+    }
+
+
+    <div class="card my-3">
+        <div class="card-header">
+            <h3><i class="fa fa-user"></i> Profile details</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 border-right">
+                    <div id="avatar_image">
+                        <img style="max-width:100px; height:auto;" src="@Model.PhotoUrl" alt="photo of @Model.Name" />
+                        <br />
+                        Photo
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <dl class="dl-horizontal">
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.BirthDate)
+                        </dt>
+
+                        <dd>
+                            @Html.Raw(Model.BirthDate.ToString("dd/MM/yyyy"))
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </dd>
+
+
+                    </dl>
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="card-footer small text-muted">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Friends</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.Friends.Any())
+                    {
+                        <div class="widget-messages nicescroll" style="height: 300px;">
+                            @foreach (var item in Model.Friends)
+                            {
+                                <div class="message-user-img">
+                                    <img style="max-width:64px; height:auto;" src="@item.PhotoUrl" alt="photo of @item.Name" class="avatar-circle" />
+                                </div>
+                                <p class="message-item-user">@item.FullName</p>
+                                <p class="message-item-msg"><a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Details","Friends", new {id=@item.Id})">Profile</a></p>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p>No friends yet</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>

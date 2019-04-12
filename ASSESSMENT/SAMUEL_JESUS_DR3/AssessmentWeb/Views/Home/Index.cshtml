@@ -1,0 +1,40 @@
+﻿@using System.ComponentModel
+@{
+    ViewBag.Title = "Home";
+}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+        <h1 class="display-4">Assessment - Desenvolvimento com serviços WCF e Microsoft Azure 2019</h1>
+        <h3>Samuel Diogo de jesus</h3>
+        <p class="lead">samuel.jesus@al.infnet.edu.br</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @{
+                    Html.RenderAction("ListOfFriends", "Friends");
+                }
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                @{
+                    Html.RenderAction("ListOfCountries", "Countries");
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                @{
+                    Html.RenderAction("ListOfStates", "States");
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
